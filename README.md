@@ -3,7 +3,7 @@ Aus Platzgründen konvertiere ich die MOV Videos von meinen iPhone zur MP4 (H265
 Damit Geolokationdaten erhalten bleiben, damit die Videos nach dem Import hübsch auf der Karte angezeigt werden, nutze ich das EXIFTOOL.
 Für einzelne Dateien klappt es gut.
 
-Ich weiß nicht was richtig(er) ist `"-all:all>all:all"` oder `-all:all`. Ich nutze die Kurzform.
+Ich weiß nicht was richtig(er) ist `"-all:all>all:all"` oder `-all:all`, ich nutze die Kurzform.
 
 ```
 exiftool.exe -TagsFromFile a:\1\img_0040.mov -all:all a:\1\mp4\img_0040.mp4 -overwrite_original -m
@@ -41,15 +41,16 @@ exiftool.exe -TagsFromFile zuHause.heic -GPS:GPSLatitudeRef -GPS:GPSLatitude -GP
 ```
 
 ## GPS-Daten von MOV zur MP4
-Hier noch die Möglichkeit z.B. von einer MOV-Datei nur die GPS-Daten **GPSCoordinates** zu Übertragen und **CreateDate** vom Dateinahmen zu 
-2023-10-06_15-57-09
+Hier noch die Möglichkeit z.B. von einer MOV-Datei nur die GPS-Daten **GPSCoordinates** zu Übertragen und **CreateDate** vom Dateinahmen (2023-10-06_15-57-09.mp4) zu übernehmen.
 
 ```
 c:\Tools\exiftool.exe -TagsFromFile %orginal% -GPSCoordinates  %ziel% -Overwrite_Original -m
 c:\Tools\exiftool.exe "-CreateDate<Filename" %ziel% -Overwrite_Original -m
 ```
 
-# Batch mehrer Dateien
+Wenn man Mit Handbrake mit der Option **Metadaten Passtrough** konvertiert dann ist die zweite Zeil CreateDate<Filename nicht notwendig.
+
+## Batch mehrer Dateien
 Wenn man die MOV Videos in einen Unterordner MP4 mit den gleichen Namen lieg hat, so kann man alles in einen Abwasch machen.
 ```
 FOR %%f IN ("*.mov") do exiftool.exe -TagsFromFile %%f -all:all .\mp4\%%~nf.mp4 -overwrite_original -m
