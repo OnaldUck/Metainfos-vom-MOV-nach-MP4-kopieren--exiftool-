@@ -7,10 +7,10 @@ Ich weiß nicht was richtig(er) ist `"-all:all>all:all"` oder `-all:all`, ich nu
 
 ```
 exiftool.exe -TagsFromFile a:\1\img_0040.mov -all:all a:\1\mp4\img_0040.mp4 -overwrite_original -m
-    1 image files updated
+1 image files updated
 ```
 
-Will man es nur paar einzelne Dateien sind, dann kann man sich das mit einer Batschdatei helfen.
+Will man nur paar einzelne Dateien sind, dann kann man sich das mit einer Batschdatei helfen.
 
 ```
 @echo off
@@ -21,7 +21,7 @@ set /p "orginal=Orginal-Datei: "
 set /p "ziel=Ziel-Datei: "
 
 rem Vom orginal MOV/HEIC auf MP4/JPG das Datum zu übertragen
-c:\Tools\exiftool.exe -TagsFromFile %orginal% -all:all %ziel% -overwrite_original -m
+exiftool.exe -TagsFromFile %orginal% -all:all %ziel% -overwrite_original -m
 
 echo ...und weiter gehts&echo.
 goto anfang
@@ -41,11 +41,15 @@ exiftool.exe -TagsFromFile zuHause.heic -GPS:GPSLatitudeRef -GPS:GPSLatitude -GP
 ```
 
 ## GPS-Daten von MOV zur MP4
+Apple MOV-Datei hat keinen einzelne Werte sonder speichert es in einen Einzeiler. `exiftool -Quicktime:GPSCoordinates="40.6892, -74.0445, 20"` wo die Nummer Latitude, Longitude, und Altitude entsprechen.
+
 Hier noch die Möglichkeit z.B. von einer MOV-Datei nur die GPS-Daten **GPSCoordinates** zu Übertragen und **CreateDate** vom Dateinahmen (2023-10-06_15-57-09.mp4) zu übernehmen.
 
+Wenn man z.B. mit Handbrake **Medtadaten-Passtruh** konvertiert hat, so ist die zweite Zeil nicht notwendig. denn CreateDate vom Original mitgenommen wird.
+
 ```
-c:\Tools\exiftool.exe -TagsFromFile %orginal% -GPSCoordinates  %ziel% -Overwrite_Original -m
-c:\Tools\exiftool.exe "-CreateDate<Filename" %ziel% -Overwrite_Original -m
+exiftool.exe -TagsFromFile %orginal% -GPSCoordinates  %ziel% -Overwrite_Original -m
+exiftool.exe "-CreateDate<Filename" %ziel% -Overwrite_Original -m
 ```
 
 Wenn man Mit Handbrake mit der Option **Metadaten Passtrough** konvertiert dann ist die zweite Zeil CreateDate<Filename nicht notwendig.
