@@ -45,14 +45,12 @@ Apple MOV-Datei hat keinen einzelne Werte sonder speichert es in einen Einzeiler
 
 Hier noch die Möglichkeit z.B. von einer MOV-Datei nur die GPS-Daten **GPSCoordinates** zu Übertragen und **CreateDate** vom Dateinahmen (2023-10-06_15-57-09.mp4) zu übernehmen.
 
-Wenn man z.B. mit Handbrake **Medtadaten-Passtruh** konvertiert hat, so ist die zweite Zeil nicht notwendig. denn CreateDate vom Original mitgenommen wird.
-
 ```
 exiftool.exe -TagsFromFile %orginal% -GPSCoordinates  %ziel% -Overwrite_Original -m
 exiftool.exe "-CreateDate<Filename" %ziel% -Overwrite_Original -m
 ```
 
-Wenn man Mit Handbrake mit der Option **Metadaten Passtrough** konvertiert dann ist die zweite Zeil CreateDate<Filename nicht notwendig.
+Wenn man mit Handbrake mit der Option **Metadaten Passtrough** konvertiert dann ist die zweite Zeil CreateDate<Filename nicht notwendig.
 
 ## Batch mehrer Dateien
 Wenn man die MOV Videos in einen Unterordner MP4 mit den gleichen Namen lieg hat, so kann man alles in einen Abwasch machen.
